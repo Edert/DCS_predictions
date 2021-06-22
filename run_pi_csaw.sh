@@ -38,7 +38,6 @@ if [ "$files" = "0" ]; then
   echo "design <- model.matrix(~0+celltype)" >> $SCRIPT
   echo "colnames(design) <- levels(celltype)" >> $SCRIPT 
   echo "binned <- windowCounts(bam.files, bin=TRUE, width=10000, param=param)" >> $SCRIPT
-  #echo "normfacs <- normOffsets(binned)" >> $SCRIPT
   echo "filtered.data <- normOffsets(binned, se.out=filtered.data)" >> $SCRIPT
   echo "y <- asDGEList(filtered.data, norm.factors=filtered.data\$norm.factors)" >> $SCRIPT
   echo "y <- estimateDisp(y, design)" >> $SCRIPT
@@ -101,7 +100,6 @@ if [ "$files" = "0" ]; then
   echo "celltype <- factor(celltype)" >> $SCRIPT
   echo "design <- model.matrix(~0+celltype)" >> $SCRIPT
   echo "colnames(design) <- levels(celltype)" >> $SCRIPT
-  #echo "remove(y,fit,contrast,res,merged,tabcom,tabbest,out.ranges)" >> $SCRIPT
   echo "spike.facs <- c($10,$11,$12,$13)" >> $SCRIPT
   echo "y <- asDGEList(filtered.data, norm.factors=spike.facs)" >> $SCRIPT
   echo "y <- estimateDisp(y, design)" >> $SCRIPT
@@ -164,7 +162,6 @@ if [ "$files" = "0" ]; then
   echo "design <- model.matrix(~0+celltype)" >> $SCRIPT
   echo "colnames(design) <- levels(celltype)" >> $SCRIPT 
   echo "binned <- windowCounts(bam.files, bin=TRUE, width=10000, param=param)" >> $SCRIPT
-  #echo "normfacs <- normOffsets(binned)" >> $SCRIPT
   echo "filtered.data <- normOffsets(binned, se.out=filtered.data)" >> $SCRIPT
   echo "y <- asDGEList(filtered.data, norm.factors=filtered.data\$norm.factors)" >> $SCRIPT
   echo "y <- estimateDisp(y, design)" >> $SCRIPT
@@ -226,7 +223,6 @@ if [ "$files" = "0" ]; then
   echo "celltype <- factor(celltype)" >> $SCRIPT
   echo "design <- model.matrix(~0+celltype)" >> $SCRIPT
   echo "colnames(design) <- levels(celltype)" >> $SCRIPT
-  #echo "remove(y,fit,contrast,res,merged,tabcom,tabbest,out.ranges)" >> $SCRIPT
   echo "spike.facs <- c($10,$11,$12,$13)" >> $SCRIPT
   echo "y <- asDGEList(filtered.data, norm.factors=spike.facs)" >> $SCRIPT
   echo "y <- estimateDisp(y, design)" >> $SCRIPT

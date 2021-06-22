@@ -27,12 +27,6 @@ if [ "$files" = "0" ]; then
   echo $8 >> C2_files.txt
   echo $9 > C2_control.txt
   
-  #test run with test data from ~/Downloads
-  #/apps/hmcan-diff/HMCan-diff --name hmcan-diff_example --C1_ChIP hmcan-diff_example/C1_files.txt --C2_ChIP hmcan-diff_example/C2_files.txt \
-  #--C1_Control hmcan-diff_example/C1_control.txt --C2_Control hmcan-diff_example/C2_control.txt --format SAM --genomePath hmcan-diff_example/reference/ \
-  #--GCProfile hmcan-diff_example/data/GC_profile_100KbWindow_Mapp76_hg19.cnp --C1_minLength 145 --C1_medLength 150 --C1_maxLength 155 --C2_minLength 145 \
-  #--C2_medLength 150 --C2_maxLength 155 --blackListFile hmcan-diff_example/data/hg19-blacklist.bed
-  
   PREPDONE=`date +%s.%N`
   
   #run 
@@ -87,7 +81,6 @@ if [ "$files" = "0" ]; then
   SF12=$(echo "print 1/($11/1000000.)" | python)
   SF21=$(echo "print 1/($12/1000000.)" | python)
   SF22=$(echo "print 1/($13/1000000.)" | python)
-  #echo $SF11 $SF12 $SF21 $SF22
   
   STARTTIME=`date +%s.%N`
   

@@ -28,7 +28,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -66,7 +65,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

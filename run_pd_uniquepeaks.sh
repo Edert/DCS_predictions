@@ -28,10 +28,8 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
   
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
-    #for PMODE in $PCALLER/$SET/all_peaks; do
     
       echo "using $(basename $PCALLER) mode: $(basename $PMODE)"
       
@@ -52,9 +50,7 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #compare
-      #bedtools subtract -a s1_peaks.bed -b s2_peaks.bed > results1.bed
       /usr/bin/time -o mem.txt -f "%K %M" bedtools subtract -a s1_peaks.bed -b s2_peaks.bed > results1.bed
-      #bedtools subtract -b s1_peaks.bed -a s2_peaks.bed > results2.bed
       /usr/bin/time -a -o mem.txt -f "%K %M" bedtools subtract -b s1_peaks.bed -a s2_peaks.bed > results2.bed
       
       #save result
@@ -83,9 +79,7 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #compare stringend (remove complete entry if there is at least 1 bp overlap)
-      #bedtools subtract -a s1_peaks.bed -b s2_peaks.bed -A > results1.bed
       /usr/bin/time -o mem.txt -f "%K %M" bedtools subtract -a s1_peaks.bed -b s2_peaks.bed -A > results1.bed
-      #bedtools subtract -b s1_peaks.bed -a s2_peaks.bed -A > results2.bed
       /usr/bin/time -a -o mem.txt -f "%K %M" bedtools subtract -b s1_peaks.bed -a s2_peaks.bed -A > results2.bed
       
       OUT_NAME=$(basename $NAME _sample1-rep1_mm)"_"$PSHORT"_"$MSHORT"_s.bed"

@@ -37,7 +37,6 @@ if [ "$files" = "0" ]; then
   echo "$9" >> THOR.config
   echo "$9" >> THOR.config
   
-  #export PATH=$PATH:/home/eder/.local/bin
   source /proj/chipseq_norm_diffbind_062017/analysis/03_db_analysis/python-virtual-environments/thor_env/bin/activate
   
   PREPDONE=`date +%s.%N`

@@ -23,7 +23,6 @@ if [ "$files" = "0" ]; then
   # in R 
   echo "start_time <- Sys.time()" > $SCRIPT
   echo "library(GenoGAM)" >> $SCRIPT
-  #echo "BiocParallel::register(BiocParallel::SnowParam(worker = 5))" >> $SCRIPT  
   echo "BiocParallel::register(BiocParallel::MulticoreParam(worker = $WORKER))" >> $SCRIPT  
   echo "ID<-c('S11','S12','S21','S22')" >> $SCRIPT
   echo "file<-c('$4','$5','$7','$8')" >> $SCRIPT
@@ -35,11 +34,9 @@ if [ "$files" = "0" ]; then
   echo "overhangSize <- 1000" >> $SCRIPT
   echo "design = ~s(x, by = S2vsS1) + s(x, by = S1vsS2)" >> $SCRIPT
   echo "settings <- GenoGAMSettings(chromosomeList = 'chr19')" >> $SCRIPT
-  #echo "ggd <- GenoGAMDataSet(expDesign, directory = '/', chunkSize = chunkSize, overhangSize = overhangSize, design=design, settings=settings, hdf5 = TRUE)" >> $SCRIPT
   echo "ggd <- GenoGAMDataSet(expDesign, directory = '/', chunkSize = chunkSize, overhangSize = overhangSize, design=design, settings=settings, hdf5 = F, split=TRUE)" >> $SCRIPT
   echo "ggd <- computeSizeFactors(ggd)" >> $SCRIPT
   echo "result <- genogam(ggd)" >> $SCRIPT
-  #echo "computeSignificance(result)" >> $SCRIPT
   echo "end_time <- Sys.time()" >> $SCRIPT
   #S1
   echo "peaks <- callPeaks(result)" >> $SCRIPT

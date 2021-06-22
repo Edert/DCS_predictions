@@ -43,7 +43,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -69,17 +68,12 @@ if [ "$files" = "0" ]; then
       echo "myinputdata <- data.frame(SampleID,Tissue,Factor,Condition,Replicate,bamReads,bamControl,Peaks,PeakCaller,stringsAsFactors=FALSE)" >> $SCRIPT
       echo "mydata <- dba(sampleSheet=myinputdata, minOverlap=2)" >> $SCRIPT
       echo "Peaks <- dba.peakset(mydata,bRetrieve=TRUE)" >> $SCRIPT
-      #echo "Profiles <- getPeakProfiles(mydata, Peaks,bin.length=50, save.files=FALSE, draw.on=FALSE, run.parallel=FALSE)" >> $SCRIPT
       echo "Profiles <- getPeakProfiles(mydata, Peaks,bin.length=50, save.files=FALSE, draw.on=FALSE)" >> $SCRIPT
       echo "Norm <- getNormFactors(Profiles, method = 'DESeq', SampleIDs=SampleID)" >> $SCRIPT
-      #echo "Dists <- compHistDists(Norm, method='MMD', overWrite=TRUE, NormMethod='DESeq', run.parallel=FALSE, save.file=FALSE)" >> $SCRIPT
-      #MMD failed for larger samples eg. set3_1 
       echo "Dists <- compHistDists(Norm, method='GMD', overWrite=TRUE, NormMethod='DESeq', save.file=FALSE)" >> $SCRIPT
       echo "group1 <- c(\"S11\",\"S12\")" >> $SCRIPT
       echo "group2 <- c(\"S21\",\"S22\")" >> $SCRIPT
-      #echo "Pvals <- detPeakPvals(Dists, group1=group1, group2=group2, name1='s1_s2', name2='Null', method='MMD')" >> $SCRIPT
       echo "Pvals <- detPeakPvals(Dists, group1=group1, group2=group2, name1='s1_s2', name2='Null', method='GMD')" >> $SCRIPT
-      #echo "out <- Pvals\$MD\$Pvals\$MMD[,7,drop=FALSE]" >> $SCRIPT
       echo "out <- Pvals\$MD\$Pvals\$GMD[,7,drop=FALSE]" >> $SCRIPT
       echo "out <- out[complete.cases(out), ,drop=FALSE]" >> $SCRIPT
       echo "final <- out[out < 0.05,,drop=FALSE]" >> $SCRIPT
@@ -89,7 +83,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

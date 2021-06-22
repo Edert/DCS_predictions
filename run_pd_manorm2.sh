@@ -26,10 +26,8 @@ if [ "$files" = "0" ]; then
   
   bamToBed -i $4 | cut -f1,2,3,6 > S11.bed
   bamToBed -i $5 | cut -f1,2,3,6 > S12.bed
-  #bamToBed -i $6 > IN1.bed
   bamToBed -i $7 | cut -f1,2,3,6 > S21.bed
   bamToBed -i $8 | cut -f1,2,3,6 > S22.bed
-  #bamToBed -i $9 > IN2.bed
   
   
   PREPDONE=`date +%s.%N`
@@ -37,7 +35,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -67,7 +64,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
 
       #save result
@@ -112,7 +108,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -158,7 +153,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -203,7 +197,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

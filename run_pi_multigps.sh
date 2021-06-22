@@ -32,7 +32,6 @@ if [ "$files" = "0" ]; then
   PREPDONE=`date +%s.%N`
   
   #default run #increased from 20G to 40G
-  #java -Xmx40G -jar /apps/multigps_v0.74/multigps_v0.74.jar --out $OUT_NAME --threads 1 --geninfo /ssd/references/THOR/mm10/chr19.chrom.size --design design.txt --nomotifs --minfold 0.7 --diffp 1.0 >> $LOG 2>&1
   /usr/bin/time -o mem.txt -f "%K %M" java -Xms20G -Xmx60G -d64 -jar /apps/multigps_v0.74/multigps_v0.74.jar --out $OUT_NAME --threads $WORKER --geninfo /ssd/references/THOR/mm10/chr19.chrom.size --design design.txt --nomotifs --minfold 0.7 --diffp 1.0 >> $LOG 2>&1
   
   ENDTIME=`date +%s.%N`

@@ -70,8 +70,7 @@ if [ "$files" = "0" ]; then
       #run it...
       #get average memory or maximum in kbytes
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
-      #R CMD BATCH --vanilla $SCRIPT
-      
+
       #save result
       PSHORT=$(basename $PCALLER)
       MSHORT=$(basename $PMODE)

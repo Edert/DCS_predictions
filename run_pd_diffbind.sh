@@ -20,7 +20,6 @@ if [ "$files" = "0" ]; then
   LOG="../../../log/$TOOL/$SET.log"
   
   DBMETHODS="DBA_EDGER DBA_DESEQ2"
-  #DBA_DESEQ DBA_EDGER_CLASSIC DBA_EDGER_GLM DBA_DESEQ_CLASSIC DBA_DESEQ_GLM DBA_EDGER_BLOCK DBA_DESEQ_BLOCK DBA_DESEQ2_BLOCK
   
   cd results/$TOOL/$SET/
   
@@ -31,7 +30,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -43,7 +41,6 @@ if [ "$files" = "0" ]; then
       cat $PMODE/s22_peaks.bed > s22_peaks.bed
 
       for DBMETHOD in $DBMETHODS; do #loop through DB methods
-        #echo "working with method: $DBMETHOD"
       
         # in R: bFullLibrarySize=F bSubControl=F
         echo "library(DiffBind)" > $SCRIPT
@@ -72,7 +69,6 @@ if [ "$files" = "0" ]; then
         STARTTIME=`date +%s.%N`
         
         #run it...
-        #R CMD BATCH --vanilla $SCRIPT
         /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
         
         #save result
@@ -101,9 +97,7 @@ if [ "$files" = "0" ]; then
         #clean up
         rm -f $SCRIPT script.Rout .RData DBA_diff_peaks.csv mem.txt
         
-        
-        
-        # bFullLibrarySize=T bSubControl=F
+
         echo "library(DiffBind)" > $SCRIPT
         echo "library(locfit)" >> $SCRIPT
         echo "SampleID=c(\"1_1\",\"1_2\",\"2_1\",\"2_2\")" >> $SCRIPT
@@ -130,7 +124,6 @@ if [ "$files" = "0" ]; then
         STARTTIME=`date +%s.%N`
         
         #run it...
-        #R CMD BATCH --vanilla $SCRIPT
         /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
         
         #save result
@@ -160,8 +153,7 @@ if [ "$files" = "0" ]; then
         rm -f $SCRIPT script.Rout .RData DBA_diff_peaks.csv mem.txt
         
         
-        
-        # bFullLibrarySize=F bSubControl=T
+
         echo "library(DiffBind)" > $SCRIPT
         echo "library(locfit)" >> $SCRIPT
         echo "SampleID=c(\"1_1\",\"1_2\",\"2_1\",\"2_2\")" >> $SCRIPT
@@ -188,7 +180,6 @@ if [ "$files" = "0" ]; then
         STARTTIME=`date +%s.%N`
         
         #run it...
-        #R CMD BATCH --vanilla $SCRIPT
         /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
         
         #save result
@@ -218,8 +209,7 @@ if [ "$files" = "0" ]; then
         rm -f $SCRIPT script.Rout .RData DBA_diff_peaks.csv mem.txt
         
         
-        
-        # bFullLibrarySize=T bSubControl=T
+
         echo "library(DiffBind)" > $SCRIPT
         echo "library(locfit)" >> $SCRIPT
         echo "SampleID=c(\"1_1\",\"1_2\",\"2_1\",\"2_2\")" >> $SCRIPT
@@ -246,7 +236,6 @@ if [ "$files" = "0" ]; then
         STARTTIME=`date +%s.%N`
         
         #run it...
-        #R CMD BATCH --vanilla $SCRIPT
         /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
         
         #save result

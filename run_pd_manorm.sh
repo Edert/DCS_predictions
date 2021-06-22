@@ -26,10 +26,9 @@ if [ "$files" = "0" ]; then
   
   bamToBed -i $4 | cut -f1,2,3,6 > S1.bed
   bamToBed -i $5 | cut -f1,2,3,6 >> S1.bed
-  #bamToBed -i $6 > IN1.bed
   bamToBed -i $7 | cut -f1,2,3,6 > S2.bed
   bamToBed -i $8 | cut -f1,2,3,6 >> S2.bed
-  #bamToBed -i $9 > IN2.bed
+
   
   #Copy the modified sh and r scripts to the directory where the bed files are stored.
   cp /apps/MAnorm/MAnorm.r .
@@ -40,7 +39,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -55,7 +53,6 @@ if [ "$files" = "0" ]; then
       #shift 200
       STARTTIME=`date +%s.%N`
       
-      #sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 200 200 >> $LOG 2>&1
       /usr/bin/time -o mem.txt -f "%K %M" sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 200 200 >> $LOG 2>&1
       
       #save log
@@ -89,7 +86,6 @@ if [ "$files" = "0" ]; then
       #shift 400
       STARTTIME=`date +%s.%N`
       
-      #sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 400 400 >> $LOG 2>&1
       /usr/bin/time -o mem.txt -f "%K %M" sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 400 400 >> $LOG 2>&1
       
       #save log
@@ -123,7 +119,6 @@ if [ "$files" = "0" ]; then
       #shift 1000
       STARTTIME=`date +%s.%N`
       
-      #sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 1000 1000 >> $LOG 2>&1
       /usr/bin/time -o mem.txt -f "%K %M" sh MAnorm.sh s1m_peaks.bed s2m_peaks.bed S1.bed S2.bed 1000 1000 >> $LOG 2>&1
       
       #save log

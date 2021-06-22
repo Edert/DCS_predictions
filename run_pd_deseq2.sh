@@ -62,7 +62,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

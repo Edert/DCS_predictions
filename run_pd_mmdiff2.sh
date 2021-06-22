@@ -43,7 +43,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -74,7 +73,6 @@ if [ "$files" = "0" ]; then
       echo "MMD <- setRegions(MMD,Peaks)" >> $SCRIPT
       echo "MMD <- getPeakReads(MMD, pairedEnd = FALSE, run.parallel = FALSE)" >> $SCRIPT
       echo "MMD <- estimateFragmentCenters(MMD)" >> $SCRIPT
-      #echo "MMD <- compHists(MMD)" >> $SCRIPT
       echo "MMD <- compDists(MMD)" >> $SCRIPT
       echo "MMD <- setContrast(MMD,contrast='byCondition')" >> $SCRIPT
       echo "MMD <- compPvals(MMD)" >> $SCRIPT
@@ -85,7 +83,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

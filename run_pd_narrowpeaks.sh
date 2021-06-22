@@ -53,9 +53,6 @@ if [ "$files" = "0" ]; then
   bamCoverage -b $7 -o S21b.bw --binSize 1 -p 1 --normalizeUsing BPM >> $LOG 2>&1
   bamCoverage -b $8 -o S22b.bw --binSize 1 -p 1 --normalizeUsing BPM >> $LOG 2>&1
   #run with different normalization: RPGC
-  #all bases minus N is effective genome size
-  #grep -v ">" ../01_simulating/data/mm10_chr19.fasta | wc | awk '{print $3-$1}'
-  #cat ../01_simulating/data/mm10_chr19.fasta | grep -v "^>" | tr -cd N | wc -c
   bamCoverage -b $4 -o S11g.bw --binSize 1 -p 1 --normalizeUsing RPGC --effectiveGenomeSize 58205856 >> $LOG 2>&1
   bamCoverage -b $5 -o S12g.bw --binSize 1 -p 1 --normalizeUsing RPGC --effectiveGenomeSize 58205856 >> $LOG 2>&1
   bamCoverage -b $7 -o S21g.bw --binSize 1 -p 1 --normalizeUsing RPGC --effectiveGenomeSize 58205856 >> $LOG 2>&1
@@ -73,7 +70,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
 
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -126,7 +122,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -194,7 +189,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -262,7 +256,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -330,7 +323,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -398,7 +390,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result
@@ -466,7 +457,6 @@ if [ "$files" = "0" ]; then
       STARTTIME=`date +%s.%N`
       
       #run it...
-      #R CMD BATCH --vanilla $SCRIPT
       /usr/bin/time -o mem.txt -f "%K %M" R CMD BATCH --vanilla $SCRIPT
       
       #save result

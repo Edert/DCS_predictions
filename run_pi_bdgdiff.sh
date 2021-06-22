@@ -15,8 +15,7 @@ if [ "$files" = "0" ]; then
   NAME2=$(basename $7 -rep1_mm.bam)
   LOG="log/$TOOL/$SET.log"
   OUT_NAME=$(basename $NAME _sample1-rep1_mm)
-  #export PYTHONPATH=$PYTHONPATH:/apps/MACS2-2.1.0.20140616/lib/python2.7/site-packages/
-  #active virtual environment for MACS2
+
   source /proj/chipseq_norm_diffbind_062017/analysis/03_db_analysis/python-virtual-environments/macs2_env/bin/activate
 
   STARTTIME=`date +%s.%N`
@@ -27,7 +26,6 @@ if [ "$files" = "0" ]; then
   macs2 callpeak -B -t $4 $5 -c $6 -f BAM -n $NAME1 --nomodel --extsize 200 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   macs2 callpeak -B -t $7 $8 -c $9 -f BAM -n $NAME2 --nomodel --extsize 200 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   
-  #egrep "tags after filtering in treatment|tags after filtering in control" cond2_peaks.xls
   D1=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME1"_peaks.xls" | cut -d' ' -f7)
   D2=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME2"_peaks.xls" | cut -d' ' -f7)
   
@@ -78,8 +76,6 @@ if [ "$files" = "0" ]; then
   echo "1si $MEMUSAGE" >> results/$TOOL/$SET/memory.txt
   
   #save result, add 1 or 2 for up in sample 1 or sample 2 and save as one csv
-  #cat results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_*.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"1"\t"$5}' > results/$TOOL/$SET/$OUT_NAME"_si1.csv"
-  #add log2 fold-change of -1.3 and 1.3 to get over the threshold of 0.7 we were simulating
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond1.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t1.3"}'  | sort -k1,1 -k2,2n >  results/$TOOL/$SET/$OUT_NAME"_1si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond2.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t-1.3"}' | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_1si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_common.bed| grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t0"}'    | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_1si.bed"
@@ -98,7 +94,6 @@ if [ "$files" = "0" ]; then
   macs2 callpeak -B -t $4 $5 -c $6 -f BAM -n $NAME1 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   macs2 callpeak -B -t $7 $8 -c $9 -f BAM -n $NAME2 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   
-  #egrep "tags after filtering in treatment|tags after filtering in control" cond2_peaks.xls
   D1=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME1"_peaks.xls" | cut -d' ' -f7)
   D2=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME2"_peaks.xls" | cut -d' ' -f7)
   
@@ -146,8 +141,6 @@ if [ "$files" = "0" ]; then
   echo "2si $MEMUSAGE" >> results/$TOOL/$SET/memory.txt
   
   #save result, add 1 or 2 for up in sample 1 or sample 2 and save as one csv
-  #cat results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_*.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"1"\t"$5}' > results/$TOOL/$SET/$OUT_NAME"_si1.csv"
-  #add log2 fold-change of -1.3 and 1.3 to get over the threshold of 0.7 we were simulating
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond1.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t1.3"}'  | sort -k1,1 -k2,2n >  results/$TOOL/$SET/$OUT_NAME"_2si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond2.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t-1.3"}' | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_2si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_common.bed| grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t0"}'    | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_2si.bed"
@@ -165,7 +158,6 @@ if [ "$files" = "0" ]; then
   macs2 callpeak --broad -B -t $4 $5 -c $6 -f BAM -n $NAME1 --nomodel --extsize 200 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   macs2 callpeak --broad -B -t $7 $8 -c $9 -f BAM -n $NAME2 --nomodel --extsize 200 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
 
-  #egrep "tags after filtering in treatment|tags after filtering in control" cond2_peaks.xls
   D1=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME1"_peaks.xls" | cut -d' ' -f7)
   D2=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME2"_peaks.xls" | cut -d' ' -f7)
 
@@ -213,8 +205,6 @@ if [ "$files" = "0" ]; then
   echo "3si $MEMUSAGE" >> results/$TOOL/$SET/memory.txt
   
   #save result, add 1 or 2 for up in sample 1 or sample 2 and save as one csv
-  #cat results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_*.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"1"\t"$5}' > results/$TOOL/$SET/$OUT_NAME"_si1.csv"
-  #add log2 fold-change of -1.3 and 1.3 to get over the threshold of 0.7 we were simulating
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond1.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t1.3"}'  | sort -k1,1 -k2,2n >  results/$TOOL/$SET/$OUT_NAME"_3si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond2.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t-1.3"}' | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_3si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_common.bed| grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t0"}'    | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_3si.bed"
@@ -233,7 +223,6 @@ if [ "$files" = "0" ]; then
   macs2 callpeak --broad -B -t $4 $5 -c $6 -f BAM -n $NAME1 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
   macs2 callpeak --broad -B -t $7 $8 -c $9 -f BAM -n $NAME2 --outdir results/$TOOL/$SET -q 0.01 2>> $LOG
 
-  #egrep "tags after filtering in treatment|tags after filtering in control" cond2_peaks.xls
   D1=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME1"_peaks.xls" | cut -d' ' -f7)
   D2=$(egrep "tags after filtering in control" results/$TOOL/$SET/$NAME2"_peaks.xls" | cut -d' ' -f7)
 
@@ -281,7 +270,6 @@ if [ "$files" = "0" ]; then
   echo "4si $MEMUSAGE" >> results/$TOOL/$SET/memory.txt
   
   #save result, add 1 or 2 for up in sample 1 or sample 2 and save as one csv
-  #cat results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_*.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"1"\t"$5}' > results/$TOOL/$SET/$OUT_NAME"_si1.csv"
   #add log2 fold-change of -1.3 and 1.3 to get over the threshold of 0.7 we were simulating
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond1.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t1.3"}'  | sort -k1,1 -k2,2n >  results/$TOOL/$SET/$OUT_NAME"_4si.bed"
   cut -f1,2,3,5 results/$TOOL/$SET/diff_c1_vs_c2_si1_c1.0_cond2.bed | grep -v "^track" | awk '{print $1"\t"$2"\t"$3"\t"$4"\t-1.3"}' | sort -k1,1 -k2,2n >> results/$TOOL/$SET/$OUT_NAME"_4si.bed"

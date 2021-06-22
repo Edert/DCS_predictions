@@ -19,10 +19,6 @@ if [ "$files" = "0" ]; then
   
   STARTTIME=`date +%s.%N`
   
-  #deadzones
-  #/apps/rseg-0.4.9/bin/deadzones -k 50 -s fa -o deadzones-mm10-chr19-k50.bed /ssd/references/THOR/mm10/
-  #cut -f1,2,3 /ssd/references/THOR/mm10/deadzones-mm10-chr19-k50.bed > /ssd/references/THOR/mm10/deadzones-mm10-chr19-k50_sub.bed
-  
   export LC_ALL=C
   bamToBed -i $4 > tmp.bed
   bamToBed -i $5 >> tmp.bed
@@ -36,7 +32,6 @@ if [ "$files" = "0" ]; then
 
   #run 
   /usr/bin/time -o mem.txt -f "%K %M" /apps/rseg-0.4.9/bin/rseg-diff -c /ssd/references/THOR/mm10/chr19.chromsize.bed -out domains.bed -d /ssd/references/THOR/mm10/deadzones-mm10-chr19-k50_sub.bed -v -mode 3 S1.bed S2.bed >> $LOG 2>&1
-  #/apps/rseg-0.4.9/bin/rseg-diff -c /ssd/references/THOR/mm10/chr19.chromsize.bed -out domains.bed -fragment_length 100 -i 20 -d /ssd/references/THOR/mm10/deadzones-mm10-chr19-k50_sub.bed -mode 3 -v S1.bed S2.bed
 
   ENDTIME=`date +%s.%N`
   TIMEDIFFPREP=`echo "$PREPDONE - $STARTTIME" | bc | awk -F"." '{print}'`

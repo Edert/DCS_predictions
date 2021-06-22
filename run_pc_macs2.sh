@@ -16,12 +16,10 @@ if [ "$files" = "0" ]; then
   LOG="log/pc/$TOOL/$SET.log"
   RESULTSDIR="results_peaks/$TOOL/$SET"
   
-  #export PYTHONPATH=$PYTHONPATH:/apps/MACS2-2.1.0.20140616/lib/python2.7/site-packages/
   #active virtual environment for MACS2
   source "/proj/chipseq_norm_diffbind_062017/analysis/03_db_analysis/python-virtual-environments/macs2_env/bin/activate"
 
   #genome size chr19: 61431566  bed file: 26969981  --> diff = 34461585
-  #cat data/mm10_chr19_repeatmasker.bed | awk -F'\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM}'
   NAME11=$(basename $4 _mm.bam)
   NAME12=$(basename $5 _mm.bam)
   NAME21=$(basename $7 _mm.bam)
@@ -37,10 +35,6 @@ if [ "$files" = "0" ]; then
   macs2 callpeak -t $7 -c $9 -f BAM -n $NAME21 --outdir $PCRUN -q 0.05  2>> $LOG
   macs2 callpeak -t $8 -c $9 -f BAM -n $NAME22 --outdir $PCRUN -q 0.05  2>> $LOG
   
-  #-g 3.4e7
-  #-g 3.4e7
-  #-g 3.4e7
-  #-g 3.4e7
   
   #move results
   cat $PCRUN/$NAME11"_peaks.narrowPeak" | cut -f1,2,3,5 > $PCRUN/s11_peaks.bed #chr start stop score

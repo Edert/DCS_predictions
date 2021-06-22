@@ -21,10 +21,8 @@ if [ "$files" = "0" ]; then
   
   bamToBed -i $4 > S1.bed
   bamToBed -i $5 >> S1.bed
-  #bamToBed -i $6 > IN1.bed
   bamToBed -i $7 > S2.bed
   bamToBed -i $8 >> S2.bed
-  #bamToBed -i $9 > IN2.bed
   
   cp /apps/ChIPDiff/config.txt config.txt
   

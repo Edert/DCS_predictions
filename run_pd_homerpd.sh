@@ -32,7 +32,6 @@ if [ "$files" = "0" ]; then
   echo "prep $TIMEDIFFPREP" > time.txt
   
   for PCALLER in ../../../results_peaks/*; do
-  #for PCALLER in "../../../results_peaks/sicer"; do
   
     for PMODE in $PCALLER/$SET/*; do
     
@@ -43,7 +42,6 @@ if [ "$files" = "0" ]; then
       
       STARTTIME=`date +%s.%N`
       
-      #/apps/homer_4.11/bin/getDifferentialPeaksReplicates.pl -t S11/ S12/ -b S21/ S22/ -i IN1/ IN2/ -f 0.7 -q 1 -p m_peaks.bed > results.txt 2>> $LOG 
       /usr/bin/time -o mem.txt -f "%K %M" /apps/homer_4.11/bin/getDifferentialPeaksReplicates.pl -t S11/ S12/ -b S21/ S22/ -i IN1/ IN2/ -f 0.7 -q 1 -p m_peaks.bed > results.txt 2>> $LOG 
       
       #save result
